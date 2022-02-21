@@ -6,8 +6,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    rake (0.9.2.2)
-    rake-compiler (0.7.9)
+    rake (13.0.6)
+    rake-compiler (1.2.5)
       rake
 
 PLATFORMS
@@ -17,7 +17,7 @@ DEPENDENCIES
   bundler (>= 1.0.0)
   jemalloc!
   rake (>= 0.8.7)
-  rake-compiler (~> 0.7.1)
+  rake-compiler (~> 1.2.5)
 
 BUNDLED WITH
-   1.13.5
+   2.3.26
