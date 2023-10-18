@@ -2,7 +2,7 @@ require 'mkmf'
 require 'rbconfig'
 
 $stdout.sync = true
-pkg = "jemalloc-5.0.1"
+pkg = "jemalloc-3.4.0"
 
 def sys(cmd)
   puts "$ #{cmd}"
@@ -24,8 +24,6 @@ Dir.chdir File.dirname(__FILE__) do
   Dir.chdir(pkg) do
     # configure
     sys "./configure"
-    # generates some .h files
-    sys "make include/jemalloc/internal/private_namespace.h"
     # zone.c is only for Mac OS X
     if RbConfig::CONFIG['target_vendor'] != "apple"
       sys "rm -fR src/zone.c"
@@ -38,6 +36,8 @@ Dir.chdir cur_dir
 
 include_dir= File.dirname(__FILE__) + "/#{pkg}/include/"
 $CFLAGS << %[ -std=gnu99 -Wall -pipe -g3 -fvisibility=hidden -O3 -funroll-loops -D_GNU_SOURCE -D_REENTRANT -I.. -I#{include_dir}]
+
+$LIBS << %[ -lpthread -ldl]
 
 create_makefile('jemalloc')
 
